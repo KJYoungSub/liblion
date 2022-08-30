@@ -843,7 +843,7 @@ namespace relion
 
 
 		// Go from projector-centered to FFTW-uncentered
-		decenter_ff(weight, Fweight, max_r2);
+		decenter_ff((relion::MultidimArray<float>&)weight, (relion::MultidimArray<float>&)Fweight, max_r2);
 
 		//gtom::WriteMRC(Fweight.data, gtom::toInt3(XSIZE(Fweight), YSIZE(Fweight), ZSIZE(Fweight)), "d_Fweight.mrc");
 
@@ -1005,8 +1005,8 @@ namespace relion
 			else
 				A3D_ELEM(weight, k, i, j) = 0.;
 		}
-		decenter_ff(weight, Fnewweight, max_r2);
-
+		//decenter_ff(weight, Fnewweight, max_r2);
+		decenter_ff((relion::MultidimArray<float>&)weight, (relion::MultidimArray<float>&)Fnewweight, max_r2);
 		//gtom::WriteMRC(Fnewweight.data, gtom::toInt3(XSIZE(Fnewweight), YSIZE(Fnewweight), ZSIZE(Fnewweight)), "d_Fnewweight.mrc");
 
 		// Iterative algorithm as in  Eq. [14] in Pipe & Menon (1999)

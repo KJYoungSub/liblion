@@ -35,7 +35,8 @@ namespace relion
 		DOUBLE imag;
 
 		// Constructor
-		Complex(DOUBLE _r = 0.0, DOUBLE _i = 0.0);
+		// Complex(DOUBLE _r = 0.0, DOUBLE _i = 0.0);
+		Complex(double _r = 0.0, double _i = 0.0);
 
 		Complex operator+(Complex &op);
 		void operator+=(Complex &op);

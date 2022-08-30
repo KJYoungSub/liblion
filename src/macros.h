@@ -44,7 +44,7 @@
 
 #ifndef MACROS_H
 #define MACROS_H
-
+#define FLOAT_PRECISION
 
 namespace relion
 {

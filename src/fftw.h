@@ -52,7 +52,7 @@
 #include "src/funcs.h"
 #include "src/tabfuncs.h"
 #include "src/complex.h"
-
+#define FLOAT_PRECISION
 
 namespace relion
 {
@@ -371,6 +371,7 @@ namespace relion
 			the result will be stored in img. This means that the size
 			of img cannot change between calls. */
 		void setReal(MultidimArray<DOUBLE> &img);
+		// void setReal(MultidimArray<float> &img);
 
 		/** Set a Multidimarray for input.
 			The data of img will be the one of fComplex. In forward

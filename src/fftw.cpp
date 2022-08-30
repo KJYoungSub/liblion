@@ -45,7 +45,7 @@
 
 #include "src/fftw.h"
 #include <string.h>
-
+#include <iostream>
 
 namespace relion
 {
@@ -102,14 +102,18 @@ namespace relion
 	void FourierTransformer::cleanup()
 	{
 		// First clear object and destroy plans
+		std::cout << "cleanup 1\n";
 		clear();
 		// Then clean up all the junk fftw keeps lying around
 		// SOMEHOW THE FOLLOWING IS NOT ALLOWED WHEN USING MULTPLE TRANSFORMER OBJECTS....
+		std::cout << "cleanup 2\n";
 	#ifdef FLOAT_PRECISION
 		/*if (threadsSetOn)
     		fftwf_cleanup_threads();
 		else*/
-    		fftwf_cleanup();
+		std::cout << "cleanup 3\n";
+    	fftwf_cleanup();
+		std::cout << "cleanup 4\n";
 	#else
 		if (threadsSetOn)
     		fftw_cleanup_threads();
@@ -121,6 +125,7 @@ namespace relion
 		std::cerr << "CLEANED-UP this= "<<this<< std::endl;
 	#endif
 
+		std::cout << "cleanup 5\n";
 	}
 
 	void FourierTransformer::destroyPlans()
@@ -248,6 +253,76 @@ namespace relion
 			dataPtr=MULTIDIM_ARRAY(*fReal);
 		}
 	}
+// 	void FourierTransformer::setReal(MultidimArray<float> &input)
+// 	{
+// 		bool recomputePlan=false;
+// 		if (fReal==NULL)
+// 			recomputePlan=true;
+// 		else if (dataPtr!=(double*)(MULTIDIM_ARRAY(input)))
+// 			recomputePlan=true;
+// 		else
+// 			recomputePlan=!(fReal->sameShape(input));
+// 		fFourier.resize(ZSIZE(input),YSIZE(input),XSIZE(input)/2+1);
+// 		fReal=(MultidimArray<double>*)&input;
+
+// 		if (recomputePlan)
+// 		{
+// 			int ndim=3;
+// 			if (ZSIZE(input)==1)
+// 			{
+// 				ndim=2;
+// 				if (YSIZE(input)==1)
+// 					ndim=1;
+// 			}
+// 			int *N = new int[ndim];
+// 			switch (ndim)
+// 			{
+// 			case 1:
+// 				N[0]=XSIZE(input);
+// 				break;
+// 			case 2:
+// 				N[0]=YSIZE(input);
+// 				N[1]=XSIZE(input);
+// 				break;
+// 			case 3:
+// 				N[0]=ZSIZE(input);
+// 				N[1]=YSIZE(input);
+// 				N[2]=XSIZE(input);
+// 				break;
+// 			}
+
+// 			// Destroy both forward and backward plans if they already exist
+// 			destroyPlans();
+
+// #pragma omp critical(Plan)
+// 			{
+// 				// Make new plans
+// #ifdef FLOAT_PRECISION
+// 				fPlanForward = fftwf_plan_dft_r2c(ndim, N, MULTIDIM_ARRAY(*fReal),
+// 					(fftwf_complex*) MULTIDIM_ARRAY(fFourier), FFTW_ESTIMATE);
+// 				fPlanBackward = fftwf_plan_dft_c2r(ndim, N,
+// 					(fftwf_complex*) MULTIDIM_ARRAY(fFourier), MULTIDIM_ARRAY(*fReal),
+// 					FFTW_ESTIMATE);
+// #else
+// 				fPlanForward = fftw_plan_dft_r2c(ndim, N, MULTIDIM_ARRAY(*fReal),
+// 					(fftw_complex*)MULTIDIM_ARRAY(fFourier), FFTW_ESTIMATE);
+// 				fPlanBackward = fftw_plan_dft_c2r(ndim, N,
+// 					(fftw_complex*)MULTIDIM_ARRAY(fFourier), MULTIDIM_ARRAY(*fReal),
+// 					FFTW_ESTIMATE);
+// #endif
+// 			}
+
+// 			if (fPlanForward == NULL || fPlanBackward == NULL)
+// 				REPORT_ERROR("FFTW plans cannot be created");
+
+// 	#ifdef DEBUG_PLANS
+// 			std::cerr << " SETREAL fPlanForward= " << fPlanForward << " fPlanBackward= " << fPlanBackward  <<" this= "<<this<< std::endl;
+// 	#endif
+
+// 			delete [] N;
+// 			dataPtr=MULTIDIM_ARRAY(*fReal);
+// 		}
+// 	}
 
 	void FourierTransformer::setReal(MultidimArray<Complex > &input)
 	{

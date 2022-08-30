@@ -53,7 +53,7 @@
 #include "src/funcs.h"
 //#include "src/xmipp/strings.h"
 #include "src/metadata_label.h"
-
+#define FLOAT_PRECISION
 
 namespace relion
 {
@@ -97,8 +97,10 @@ namespace relion
 		/** Creates a new label-value pair, and checks the type of the label is the same as that of value */
 #ifdef FLOAT_PRECISION
 		void addValue(EMDLabel name, const double &value);
+		void addValue(EMDLabel name, const float &value);
+#else
+		void addValue(EMDLabel name, const double &value);
 #endif
-		void addValue(EMDLabel name, const DOUBLE &value);
 		void addValue(EMDLabel name, const int &value);
 		void addValue(EMDLabel name, const long int &value);
 		void addValue(EMDLabel name, const bool &value);

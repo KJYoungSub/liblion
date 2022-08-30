@@ -54,7 +54,7 @@
 #include "src/matrix1d.h"
 #include "src/matrix2d.h"
 #include "src/complex.h"
-
+#define FLOAT_PRECISION
 
 namespace relion
 {

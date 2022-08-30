@@ -23,10 +23,15 @@
 namespace relion
 {
 	// Constructor with two arguments
-	Complex::Complex(DOUBLE _r, DOUBLE _i)
+	// Complex::Complex(DOUBLE _r, DOUBLE _i)
+	// {
+	// 	real = _r;
+	// 	imag = _i;
+	// }
+	Complex::Complex(double _r, double _i)
 	{
-		real = _r;
-		imag = _i;
+		real = (float)_r;
+		imag = (float)_i;
 	}
 
 	Complex Complex::operator+ (Complex &op)

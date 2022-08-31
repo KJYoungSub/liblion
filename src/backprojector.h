@@ -313,7 +313,20 @@ namespace relion
 			}
 		}
 
-		void decenter_ff(MultidimArray<float> &Min, MultidimArray<float> &Mout, int my_rmax2)
+		void decenter_ff(MultidimArray<double> &Min, MultidimArray<double> &Mout, int my_rmax2)
+		{
+
+			// Mout should already have the right size
+			// Initialize to zero
+			Mout.initZeros();
+			FOR_ALL_ELEMENTS_IN_FFTW_TRANSFORM(Mout)
+			{
+				if (kp*kp + ip * ip + jp * jp <= my_rmax2)
+					DIRECT_A3D_ELEM(Mout, k, i, j) = A3D_ELEM(Min, kp, ip, jp);
+			}
+		}
+
+		void decenter_ff(MultidimArray<double> &Min, MultidimArray<float> &Mout, int my_rmax2)
 		{
 
 			// Mout should already have the right size

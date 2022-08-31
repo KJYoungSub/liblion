@@ -30,8 +30,8 @@ namespace relion
 	// }
 	Complex::Complex(double _r, double _i)
 	{
-		real = (float)_r;
-		imag = (float)_i;
+		real = _r;
+		imag = _i;
 	}
 
 	Complex Complex::operator+ (Complex &op)

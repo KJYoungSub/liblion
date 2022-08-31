@@ -53,7 +53,6 @@
 #include "src/funcs.h"
 //#include "src/xmipp/strings.h"
 #include "src/metadata_label.h"
-#define FLOAT_PRECISION
 
 namespace relion
 {

@@ -52,7 +52,6 @@
 #include "src/funcs.h"
 #include "src/tabfuncs.h"
 #include "src/complex.h"
-#define FLOAT_PRECISION
 
 namespace relion
 {
@@ -370,7 +369,7 @@ namespace relion
 			transforms it is not modified, but in backward transforms,
 			the result will be stored in img. This means that the size
 			of img cannot change between calls. */
-		void setReal(MultidimArray<DOUBLE> &img);
+		void setReal(MultidimArray<double> &img);
 		// void setReal(MultidimArray<float> &img);
 
 		/** Set a Multidimarray for input.

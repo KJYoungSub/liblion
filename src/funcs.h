@@ -59,7 +59,6 @@
 #include "src/numerical_recipes.h"
 #include "src/macros.h"
 #include "src/error.h"
-#define FLOAT_PRECISION
 
 namespace relion
 {
